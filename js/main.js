@@ -103,9 +103,9 @@ function getWord(x) {
 function createOption(i, j) {
     return `
         <div class="col-sm-6 col-12 px-3 py-2">
-            <button class="option rounded-4 py-2" onclick="nextQuestion(${i},${questions[i].answers[j].value})">
+            <div class="option rounded-4 py-2" onclick="nextQuestion(${i},${questions[i].answers[j].value})">
                 <p class="h2 text-center">${questions[i].answers[j].name}</p>
-            </button>
+            </div>
         </div>
     `
 }
