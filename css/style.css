@@ -1,0 +1,41 @@
+body{
+    background-color: #ddd;
+}
+.img-box{
+    display: flex;
+    justify-content: center;
+}
+.img-box img{
+    border-radius: 1rem;
+}
+.img-box img, .answer-container{
+    width: 50%;
+}
+.q-box>h3{
+    width: 50%;
+}
+.answer-container{
+    width: 60%;
+}
+
+.option{
+    font-family: "Wittgenstein", serif;
+    letter-spacing: 1px;
+    border: 0;
+    width: 100%;
+    /* font-style: italic; */
+    background-color: #619AB9;
+    cursor: pointer;
+    transition: .5s;
+}
+.option p{
+    font-weight: 500;
+}
+.option:hover{
+    background-color: #9EBFD9;
+}
+
+.start-quiz-btn{
+    border: 0;
+    font-size: 50px;
+}

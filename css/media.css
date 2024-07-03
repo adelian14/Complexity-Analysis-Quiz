@@ -1,0 +1,31 @@
+@media (max-width: 992px) {
+    .img-box img, .answer-container{
+        width: 75%;
+    }
+    .answer-container{
+        width: 80%;
+    }
+    .q-box>h3{
+        width: 75%;
+    }
+}
+@media (max-width: 576px) {
+    .img-box{
+        border-radius: 0;
+        overflow-x: scroll;
+        display: block;
+    }
+    .img-box img, .answer-container{
+        width: 100%;
+        border-radius: 0;
+    }
+    .img-box img{
+        width: 158%;
+    }
+    .q-box>h3{
+        width: 100%;
+    }
+    .start-quiz-btn{
+        font-size: 30px;
+    }
+}
