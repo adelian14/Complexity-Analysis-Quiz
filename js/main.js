@@ -25,7 +25,7 @@ let yourAnswers = [];
 let correctAnswers = [];
 showAnswersBtn.addEventListener('click', function () {
     $(questionAnswersBox).fadeToggle(500);
-})
+});
 
 let questions = [
     createQuestion(1, one, n, n2, log, 2),
