@@ -38,14 +38,20 @@
         <div id="question" style="display: none;">
 
         </div>
-        <div id="result" class="vh-100 pt-5" style="display: none;">
-            <div class="container pt-5">
+        <div id="result" class="pt-5" style="display: none; min-height: 100vh;">
+            <div class="container-fluid pt-5">
                 <div class="row pt-5">
                     <div class="col-12 text-center mt-5">
                         <h1 class="display-4 fw-semibold mb-3" id="grade">Very Good!</h1>
                         <h1 class="fw-semibold mb-4" id="score">Your score is 20/30</h1>
-                        <button class="px-5 rounded-pill start-quiz-btn btn-success btn" id="restart-quiz-btn">Retake
+                        <button class="px-4 rounded-pill start-quiz-btn btn-success btn" id="restart-quiz-btn">Retake
                             Quiz</button>
+                        <button class="px-4 rounded-pill start-quiz-btn btn-primary btn" id="show-answers-btn">Show answers</button>
+                    </div>
+                    <div class="col-12">
+                        <div id="final-answers" class="row mt-3" style="display: none;">
+                            
+                        </div>
                     </div>
                 </div>
             </div>
