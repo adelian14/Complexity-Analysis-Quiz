@@ -1,8 +1,10 @@
-let score=0;
+let score = 0;
 let questionBox = document.querySelector('#question');
+let questionAnswersBox = document.querySelector('#final-answers');
 let result = document.querySelector('#result');
 let startQuizBtn = document.querySelector('#start-quiz-btn');
 let restartQuizBtn = document.querySelector('#restart-quiz-btn');
+let showAnswersBtn = document.querySelector('#show-answers-btn');
 let finalScore = document.querySelector('#score');
 let finalGrade = document.querySelector('#grade');
 let one = 'O(1)';
@@ -19,6 +21,11 @@ let p4n = `O(${pow(2, 'n')})`;
 let sqrt = `O(&radic;n)`;
 let nsqrt = `O(n&radic;n)`;
 let n2sqrt = `O(${pow('n', 2)}&radic;n)`;
+let yourAnswers=[];
+let correctAnswers=[];
+showAnswersBtn.addEventListener('click',function(){
+    $(questionAnswersBox).fadeToggle(500);
+})
 
 let questions = [
     createQuestion(1, one, n, n2, log, 2),
@@ -80,24 +87,26 @@ function createQuestion(img, a, b, c, d, corret) {
     };
 }
 
-startQuizBtn.addEventListener('click',function() {
-    $('#home').fadeOut(500,function() {
+startQuizBtn.addEventListener('click', function () {
+    $('#home').fadeOut(500, function () {
         displayQuestion(0);
     });
 });
-restartQuizBtn.addEventListener('click',function() {
-    $('#result').fadeOut(500,function() {
-        score=0;
+restartQuizBtn.addEventListener('click', function () {
+    $('#result').fadeOut(500, function () {
+        score = 0;
+        yourAnswers=[];
+        correctAnswers=[];
         displayQuestion(0);
     });
 });
 
 function getWord(x) {
-    let k = (x/questions.length)*100;
-    if(k==100) return 'Perfect!';
-    if(k >= 85) return 'Excellant!';
-    if(k >= 75) return 'Very Good!';
-    if(k >= 60) return 'Good!';
+    let k = (x / questions.length) * 100;
+    if (k == 100) return 'Perfect!';
+    if (k >= 85) return 'Excellant!';
+    if (k >= 75) return 'Very Good!';
+    if (k >= 60) return 'Good!';
     return `That's okay, you can do better next time!`;
 }
 function createOption(i, j) {
@@ -113,7 +122,7 @@ function createQuestionHtml(i) {
     let box = `
     <div class="row mt-3">
         <div class="col-12 q-box">
-            <h3 class="m-auto mb-2">${i+1} of ${questions.length}</h3>
+            <h3 class="m-auto mb-2">${i + 1} of ${questions.length}</h3>
             <h3 class="h3 m-auto mb-3">Analyze the time complexity of the following code</h3>
             <div class="img-box">
                 <img src="${questions[i].img}" class="m-auto" alt="">
@@ -134,12 +143,44 @@ function createQuestionHtml(i) {
     `
     return box;
 }
+function createFinalAnswers() {
+    let box = ``;
+    for (let i = 0; i < questions.length; i++) {
+        box += `
+    <div class="col-12 mt-3">
+        <div class="row mt-3">
+            <div class="col-12 q-box">
+                <h3 class="m-auto mb-2">Question ${i + 1}</h3>
+                <div class="img-box">
+                    <img src="${questions[i].img}" class="m-auto final-img" alt="">
+                </div>
+            </div>
+            <div class=" col-12 mt-3">
+                    <div class="m-auto correct-answer">
+                        <div class="py-2">
+                            <p class="h5 text-center">Your answer <span class="final-answer rounded-2 px-2 ${yourAnswers[i]==correctAnswers[i]?'bg-success':'bg-danger'}">${yourAnswers[i]}</span></p>
+                        </div>
+                        <div class="py-2">
+                            <p class="h5 text-center">Correct answer <span class="final-answer rounded-2 px-2 bg-success">${correctAnswers[i]}</span></p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    `;
+    }
+    return box;
+}
 function nextQuestion(i, val) {
     if (questions[i].corret == val) score++;
+    for(let j = 0; j < questions[i].answers.length; j++){
+        if(questions[i].answers[j].value==val) yourAnswers.push(questions[i].answers[j].name);
+        if(questions[i].answers[j].value==questions[i].corret) correctAnswers.push(questions[i].answers[j].name);
+    }
     displayQuestion(i + 1);
 }
 function displayQuestion(i) {
-    if(i >= questions.length){
+    if (i >= questions.length) {
         displayAnswer();
         return;
     }
@@ -148,13 +189,14 @@ function displayQuestion(i) {
         setTimeout(function () { $('#question').fadeIn(200); }, 100)
     });
 }
-function displayAnswer(){
-    $('#question').fadeOut(500,function(){
+function displayAnswer() {
+    $('#question').fadeOut(500, function () {
         loadResult();
         $('#result').fadeIn(500);
     });
 }
-function loadResult(){
+function loadResult() {
     finalGrade.innerHTML = getWord(score);
     finalScore.innerHTML = `Your score is ${score}/${questions.length}`;
+    questionAnswersBox.innerHTML = createFinalAnswers();
 }
