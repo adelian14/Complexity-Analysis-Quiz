@@ -1,5 +1,12 @@
+@media (max-width: 1176px) {
+    .correct-answer{
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+    }
+}
 @media (max-width: 992px) {
-    .img-box img, .answer-container{
+    .img-box img, .answer-container, .correct-answer, .final-img{
         width: 75%;
     }
     .answer-container{
@@ -15,7 +22,7 @@
         overflow-x: scroll;
         display: block;
     }
-    .img-box img, .answer-container{
+    .img-box img, .answer-container, .correct-answer, .final-img{
         width: 100%;
         border-radius: 0;
     }
