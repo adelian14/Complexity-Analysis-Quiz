@@ -8,14 +8,21 @@ body{
 .img-box img{
     border-radius: 1rem;
 }
-.img-box img, .answer-container{
-    width: 50%;
+.img-box img, .answer-container, .final-img{
+    width: 53%;
+}
+.correct-answer{
+    display: flex;
+    justify-content: space-between;
 }
 .q-box>h3{
-    width: 50%;
+    width: 53%;
 }
 .answer-container{
     width: 60%;
+}
+.correct-answer{
+    width: 53%;
 }
 
 .option{
@@ -28,6 +35,9 @@ body{
     cursor: pointer;
     transition: .5s;
 }
+.final-answer{
+    font-family: "Wittgenstein", serif;
+}
 .option p{
     font-weight: 500;
 }
@@ -37,5 +47,6 @@ body{
 
 .start-quiz-btn{
     border: 0;
-    font-size: 50px;
+    font-size: 36px;
+    margin: 10px 5px;
 }
