@@ -21,9 +21,9 @@ let p4n = `O(${pow(2, 'n')})`;
 let sqrt = `O(&radic;n)`;
 let nsqrt = `O(n&radic;n)`;
 let n2sqrt = `O(${pow('n', 2)}&radic;n)`;
-let yourAnswers=[];
-let correctAnswers=[];
-showAnswersBtn.addEventListener('click',function(){
+let yourAnswers = [];
+let correctAnswers = [];
+showAnswersBtn.addEventListener('click', function () {
     $(questionAnswersBox).fadeToggle(500);
 })
 
@@ -95,8 +95,8 @@ startQuizBtn.addEventListener('click', function () {
 restartQuizBtn.addEventListener('click', function () {
     $('#result').fadeOut(500, function () {
         score = 0;
-        yourAnswers=[];
-        correctAnswers=[];
+        yourAnswers = [];
+        correctAnswers = [];
         displayQuestion(0);
     });
 });
@@ -112,9 +112,9 @@ function getWord(x) {
 function createOption(i, j) {
     return `
         <div class="col-sm-6 col-12 px-3 py-2">
-            <button class="option rounded-4 py-2" onclick="nextQuestion(${i},${questions[i].answers[j].value})">
+            <div class="option rounded-4 py-2" onclick="nextQuestion(${i},${questions[i].answers[j].value})">
                 <p class="h2 text-center">${questions[i].answers[j].name}</p>
-            </button>
+            </div>
         </div>
     `
 }
@@ -158,7 +158,7 @@ function createFinalAnswers() {
             <div class=" col-12 mt-3">
                     <div class="m-auto correct-answer">
                         <div class="py-2">
-                            <p class="h5 text-center">Your answer <span class="final-answer rounded-2 px-2 ${yourAnswers[i]==correctAnswers[i]?'bg-success':'bg-danger'}">${yourAnswers[i]}</span></p>
+                            <p class="h5 text-center">Your answer <span class="final-answer rounded-2 px-2 ${yourAnswers[i] == correctAnswers[i] ? 'bg-success' : 'bg-danger'}">${yourAnswers[i]}</span></p>
                         </div>
                         <div class="py-2">
                             <p class="h5 text-center">Correct answer <span class="final-answer rounded-2 px-2 bg-success">${correctAnswers[i]}</span></p>
@@ -172,10 +172,12 @@ function createFinalAnswers() {
     return box;
 }
 function nextQuestion(i, val) {
-    if (questions[i].corret == val) score++;
-    for(let j = 0; j < questions[i].answers.length; j++){
-        if(questions[i].answers[j].value==val) yourAnswers.push(questions[i].answers[j].name);
-        if(questions[i].answers[j].value==questions[i].corret) correctAnswers.push(questions[i].answers[j].name);
+    if (correctAnswers.length == i) {
+        if (questions[i].corret == val) score++;
+        for (let j = 0; j < questions[i].answers.length; j++) {
+            if (questions[i].answers[j].value == val) yourAnswers.push(questions[i].answers[j].name);
+            if (questions[i].answers[j].value == questions[i].corret) correctAnswers.push(questions[i].answers[j].name);
+        }
     }
     displayQuestion(i + 1);
 }
